@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
 import { FormContainer } from './styled';
 
 const AuthPage = ({ match }) => {
+
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
     const onRegisterPage = match.path === '/register';
 
@@ -27,15 +31,15 @@ const AuthPage = ({ match }) => {
                     label="Имя"
                     name="username"
                     rules={[{ required: true, message: 'Please input your username!' }]}>
-                    <Input />
+                    <Input value={username} onChange={e => setUsername(e.target.value)} />
                 </Form.Item>
 
                 {onRegisterPage && (
                     <Form.Item
-                        name={['user', 'email']}
+                        name={['email']}
                         label="Email"
                         rules={[{ type: 'email' }]}>
-                        <Input />
+                        <Input value={email} onChange={e => setEmail(e.target.value)} />
                     </Form.Item>
                 )}
 
@@ -43,7 +47,7 @@ const AuthPage = ({ match }) => {
                     label="Пароль"
                     name="password"
                     rules={[{ required: true, message: 'Please input your password!' }]}>
-                    <Input.Password />
+                    <Input.Password value={password} onChange={e => setPassword(e.target.value)} />
                 </Form.Item>
 
                 <Form.Item name="remember" valuePropName="checked">

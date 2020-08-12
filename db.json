@@ -1,0 +1,100 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "Василий Рогов",
+      "contacts": [
+        {
+          "name": "Толян",
+          "items": [
+            {
+              "type": "phone",
+              "value": 88002000600
+            },
+            {
+              "type": "whatsApp",
+              "value": 88002000600
+            }
+          ]
+        },
+        {
+          "name": "Георгич",
+          "items": [
+            {
+              "type": "phone",
+              "value": 89501459657
+            },
+            {
+              "type": "whatsApp",
+              "value": 89501459657
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "username": "Анатолий Дукалис",
+      "contacts": [
+        {
+          "name": "Вася",
+          "items": [
+            {
+              "type": "phone",
+              "value": 86547896214
+            },
+            {
+              "type": "whatsApp",
+              "value": 86547896214
+            }
+          ]
+        },
+        {
+          "name": "Георгич",
+          "items": [
+            {
+              "type": "phone",
+              "value": 89501459657
+            },
+            {
+              "type": "whatsApp",
+              "value": 89501459657
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "username": "Георгич",
+      "contacts": [
+        {
+          "name": "Толя",
+          "items": [
+            {
+              "type": "phone",
+              "value": 88002000600
+            },
+            {
+              "type": "whatsApp",
+              "value": 88002000600
+            }
+          ]
+        },
+        {
+          "name": "Рогов",
+          "items": [
+            {
+              "type": "phone",
+              "value": 86547896214
+            },
+            {
+              "type": "whatsApp",
+              "value": 86547896214
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

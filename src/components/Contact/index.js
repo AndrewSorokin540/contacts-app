@@ -1,10 +1,10 @@
 import React from 'react';
 import { PhoneOutlined, WhatsAppOutlined } from '@ant-design/icons';
-import { Flex } from 'styled';
-import { Wrapper, Name, ContactValue } from './styled';
+import { Wrapper, Name } from './styled';
 
-const Contact = ({ contact }) => {
-    const { contactName, contactsItems } = contact;
+const Contact = ({ user }) => {
+    const { username, contacts } = user;
+    console.log(username, contacts)
 
     const mapTypeToIcon = (type) => {
         switch (type) {
@@ -19,18 +19,24 @@ const Contact = ({ contact }) => {
         }
     }
 
-    const ContactItem = ({ itemType, value }) => {
-        return (
-            <Flex alignCenter>
-                {mapTypeToIcon(itemType)}
-                <ContactValue>{value}</ContactValue>
-            </Flex>
-        )
-    }
     return (
         <Wrapper>
-            <Name>{contactName}</Name>
-            {contactsItems.map(({ itemType, value }) => <ContactItem key={itemType + value} itemType={itemType} value={value} />)}
+            <Name>{username}</Name>
+            {contacts.map(({ name, items }) => {
+                return (
+                    <div key={name}>
+                        <div>{name}</div>
+                        {items.map(({ type, value }) => {
+                            return (
+                                <div key={type + value}>
+                                    <div>{mapTypeToIcon(type)}</div>
+                                    <div>{value}</div>
+                                </div>
+                            )
+                        })}
+                    </div>
+                )
+            })}
         </Wrapper >
     );
 }
