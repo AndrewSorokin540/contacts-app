@@ -1,26 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { Spin } from 'antd';
 import { Contact } from 'components';
+import { useFetch } from 'hooks';
+import { Flex } from 'styled';
 
 const ContactsPage = () => {
 
-    const [users, setUsers] = useState([]);
-    const [dataLoaded, setDataLoaded] = useState(false)
+    const [{ response }, doFetch] = useFetch('/users/');
 
     useEffect(() => {
-        if (!dataLoaded) {
-            fetch('http://localhost:3000/users')
-                .then(response => response.json())
-                .then(users => setUsers(users));
+        doFetch()
+    }, [doFetch])
 
-            setDataLoaded(true);
-        }
-    }, [users])
-
+    if (response) {
+        return (
+            response.map(user => {
+                return <Contact key={user.username} user={user} />
+            })
+        )
+    }
     return (
-        users.map(user => {
-            return <Contact key={user.username} user={user} />
-        })
+        <Flex justifyCenter style={{ marginTop: '50px' }}>
+            <Spin size="large" />
+        </Flex>
     )
+
 }
 
 export default ContactsPage;

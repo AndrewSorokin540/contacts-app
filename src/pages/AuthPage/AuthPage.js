@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { Form, Input, Button, Checkbox } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Form, Input, Button } from 'antd';
+import { useFetch } from 'hooks';
 import { FormContainer } from './styled';
 
 const AuthPage = ({ match }) => {
@@ -9,10 +10,24 @@ const AuthPage = ({ match }) => {
     const [password, setPassword] = useState('');
 
     const onRegisterPage = match.path === '/register';
+    const fetchUrl = onRegisterPage ? '/register' : '/login'
+    const [{ response, error }, doFetch] = useFetch(fetchUrl);
+
 
     const onFinish = values => {
         console.log('Success:', values);
+        doFetch({
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({ username, email, password })
+        })
     };
+
+    useEffect(() => {
+        console.log('response', response)
+    }, [response])
 
     const onFinishFailed = errorInfo => {
         console.log('Failed:', errorInfo);
@@ -23,35 +38,29 @@ const AuthPage = ({ match }) => {
             <Form
                 layout='vertical'
                 name="basic"
-                initialValues={{ remember: true }}
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}>
-
-                <Form.Item
-                    label="Имя"
-                    name="username"
-                    rules={[{ required: true, message: 'Please input your username!' }]}>
-                    <Input value={username} onChange={e => setUsername(e.target.value)} />
-                </Form.Item>
-
                 {onRegisterPage && (
                     <Form.Item
-                        name={['email']}
-                        label="Email"
-                        rules={[{ type: 'email' }]}>
-                        <Input value={email} onChange={e => setEmail(e.target.value)} />
+                        label="Имя"
+                        name="username"
+                        rules={[{ message: 'Please input your username!' }]}>
+                        <Input value={username} onChange={e => setUsername(e.target.value)} />
                     </Form.Item>
                 )}
+
+                <Form.Item
+                    name={['email']}
+                    label="Email"
+                    rules={[{ required: true, type: 'email' }]}>
+                    <Input value={email} onChange={e => setEmail(e.target.value)} />
+                </Form.Item>
 
                 <Form.Item
                     label="Пароль"
                     name="password"
                     rules={[{ required: true, message: 'Please input your password!' }]}>
                     <Input.Password value={password} onChange={e => setPassword(e.target.value)} />
-                </Form.Item>
-
-                <Form.Item name="remember" valuePropName="checked">
-                    <Checkbox>Запомнить меня</Checkbox>
                 </Form.Item>
 
                 <Form.Item>

@@ -3,6 +3,8 @@
     {
       "id": 1,
       "username": "Василий Рогов",
+      "email": "vasya@mail.ru",
+      "password": 1234,
       "contacts": [
         {
           "name": "Толян",
@@ -34,6 +36,8 @@
     },
     {
       "id": 2,
+      "email": "strongtolyan@yandex.ru",
+      "password": 100500,
       "username": "Анатолий Дукалис",
       "contacts": [
         {
@@ -66,6 +70,8 @@
     },
     {
       "id": 3,
+      "email": "maningray@yandex.ru",
+      "password": 5555,
       "username": "Георгич",
       "contacts": [
         {
@@ -95,6 +101,12 @@
           ]
         }
       ]
+    },
+    {
+      "email": "qqqq@gmail.com",
+      "password": "$2a$10$D.OKyP7O1Vep.RdjFwH8FOhaLSXIcmk1O8oFG/MxGxWHABGIxgILO",
+      "username": "qqqq",
+      "id": 4
     }
   ]
 }
