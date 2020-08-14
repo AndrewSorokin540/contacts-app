@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 
-const useFetch = (url) => {
+const useFetch = (endpoint) => {
     const baseUrl = 'http://localhost:3001'
 
     const [options, setOptions] = useState({});
@@ -15,13 +15,13 @@ const useFetch = (url) => {
 
     useEffect(() => {
         if (readyToFetching) {
-            fetch(baseUrl + url, options)
+            fetch(baseUrl + endpoint, options)
                 .then(res => res.json())
                 .then(data => setResponse(data))
                 .catch(err => setError(err))
                 .finally(() => setReadyToFetching(false))
         }
-    }, [url, options, readyToFetching]);
+    }, [endpoint, options, readyToFetching]);
 
     return [{ response, error }, doFetch]
 }

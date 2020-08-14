@@ -1,21 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Form, Input, Button } from 'antd';
-import { useFetch } from 'hooks';
+import { useFetch, useLocalStorage } from 'hooks';
+import { CurrentUserContext } from 'contexts';
 import { FormContainer } from './styled';
 
 const AuthPage = ({ match }) => {
-
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
     const onRegisterPage = match.path === '/register';
     const fetchUrl = onRegisterPage ? '/register' : '/login'
-    const [{ response, error }, doFetch] = useFetch(fetchUrl);
+    const [{ response }, doFetch] = useFetch(fetchUrl);
+    const [token, setToken] = useLocalStorage('token');
+    const [currentUserState, setCurrentUserState] = useContext(CurrentUserContext);
 
-
-    const onFinish = values => {
-        console.log('Success:', values);
+    const onFinish = () => {
         doFetch({
             method: 'POST',
             headers: {
@@ -26,26 +25,23 @@ const AuthPage = ({ match }) => {
     };
 
     useEffect(() => {
-        console.log('response', response)
+        if (response) {
+            console.log('AuthPage UseEffect response:', response);
+        }
     }, [response])
-
-    const onFinishFailed = errorInfo => {
-        console.log('Failed:', errorInfo);
-    };
 
     return (
         <FormContainer>
             <Form
                 layout='vertical'
                 name="basic"
-                onFinish={onFinish}
-                onFinishFailed={onFinishFailed}>
+                onFinish={onFinish}>
                 {onRegisterPage && (
                     <Form.Item
                         label="Имя"
                         name="username"
                         rules={[{ message: 'Please input your username!' }]}>
-                        <Input value={username} onChange={e => setUsername(e.target.value)} />
+                        <Input size="large" value={username} onChange={e => setUsername(e.target.value)} />
                     </Form.Item>
                 )}
 
@@ -53,18 +49,18 @@ const AuthPage = ({ match }) => {
                     name={['email']}
                     label="Email"
                     rules={[{ required: true, type: 'email' }]}>
-                    <Input value={email} onChange={e => setEmail(e.target.value)} />
+                    <Input size="large" value={email} onChange={e => setEmail(e.target.value)} />
                 </Form.Item>
 
                 <Form.Item
                     label="Пароль"
                     name="password"
                     rules={[{ required: true, message: 'Please input your password!' }]}>
-                    <Input.Password value={password} onChange={e => setPassword(e.target.value)} />
+                    <Input.Password size="large" value={password} onChange={e => setPassword(e.target.value)} />
                 </Form.Item>
 
                 <Form.Item>
-                    <Button type="primary" htmlType="submit">
+                    <Button size="large" block type="primary" htmlType="submit">
                         {onRegisterPage ? 'Зарегистрироваться' : 'Войти'}
                     </Button>
                 </Form.Item>

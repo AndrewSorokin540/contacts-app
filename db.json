@@ -2,9 +2,9 @@
   "users": [
     {
       "id": 1,
-      "username": "Василий Рогов",
       "email": "vasya@mail.ru",
       "password": 1234,
+      "username": "Василий Рогов",
       "contacts": [
         {
           "name": "Толян",
@@ -103,9 +103,9 @@
       ]
     },
     {
-      "email": "qqqq@gmail.com",
-      "password": "$2a$10$D.OKyP7O1Vep.RdjFwH8FOhaLSXIcmk1O8oFG/MxGxWHABGIxgILO",
-      "username": "qqqq",
+      "email": "yyyy@gmail.com",
+      "password": "$2a$10$9VwmTiSnvFx.ZtSbnnhx7eVLcSqDygXC5mncrIir2RirTG9JFmMlK",
+      "username": "yyyy",
       "id": 4
     }
   ]

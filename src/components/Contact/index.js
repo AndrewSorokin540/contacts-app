@@ -4,7 +4,8 @@ import { Wrapper, Name } from './styled';
 
 const Contact = ({ user }) => {
     const { username, contacts } = user;
-    console.log(username, contacts)
+
+    console.log(user)
 
     const mapTypeToIcon = (type) => {
         switch (type) {
@@ -22,7 +23,7 @@ const Contact = ({ user }) => {
     return (
         <Wrapper>
             <Name>{username}</Name>
-            {contacts.map(({ name, items }) => {
+            {contacts && contacts.map(({ name, items }) => {
                 return (
                     <div key={name}>
                         <div>{name}</div>
