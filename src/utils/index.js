@@ -1,3 +1,3 @@
-import { getUserIdFromToken } from './getUserIdFromToken';
+import { getUserFromToken } from './getUserFromToken';
 
-export { getUserIdFromToken };
+export { getUserFromToken };

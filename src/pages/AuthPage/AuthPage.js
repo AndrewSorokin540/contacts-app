@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Form, Input, Button } from 'antd';
 import { useFetch, useLocalStorage } from 'hooks';
 import { CurrentUserContext } from 'contexts';
+import { getUserFromToken } from 'utils';
 import { FormContainer } from './styled';
 
 const AuthPage = ({ match }) => {
@@ -11,8 +12,8 @@ const AuthPage = ({ match }) => {
     const onRegisterPage = match.path === '/register';
     const fetchUrl = onRegisterPage ? '/register' : '/login'
     const [{ response }, doFetch] = useFetch(fetchUrl);
-    const [token, setToken] = useLocalStorage('token');
-    const [currentUserState, setCurrentUserState] = useContext(CurrentUserContext);
+    const [, setToken] = useLocalStorage('token');
+    const [, setCurrentUserState] = useContext(CurrentUserContext);
 
     const onFinish = () => {
         doFetch({
@@ -25,10 +26,24 @@ const AuthPage = ({ match }) => {
     };
 
     useEffect(() => {
-        if (response) {
-            console.log('AuthPage UseEffect response:', response);
+        if (response && response.accessToken) {
+            const { accessToken } = response;
+            setToken(accessToken);
+
+            const [userId] = getUserFromToken(accessToken)
+            setCurrentUserState(state => ({
+                ...state,
+                loading: false,
+                isLoggenIn: true,
+                currentUser: {
+                    ...state.currentUser,
+                    email,
+                    username,
+                    id: userId
+                }
+            }))
         }
-    }, [response])
+    }, [response, setToken, email, username, setCurrentUserState])
 
     return (
         <FormContainer>

@@ -6,7 +6,6 @@ const { Header: AntHeader } = Layout;
 
 const Header = () => {
     const [currentUserState] = useContext(CurrentUserContext);
-    console.log('HEADER currentUserState', currentUserState)
     return (
         <AntHeader>
             <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>

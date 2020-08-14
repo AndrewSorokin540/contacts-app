@@ -5,8 +5,6 @@ import { Wrapper, Name } from './styled';
 const Contact = ({ user }) => {
     const { username, contacts } = user;
 
-    console.log(user)
-
     const mapTypeToIcon = (type) => {
         switch (type) {
             case 'phone':

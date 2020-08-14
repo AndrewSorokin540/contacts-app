@@ -4,8 +4,6 @@ const useLocalStorage = (key) => {
 
     const [value, setValue] = useState(() => localStorage.getItem(key) || '');
 
-    console.log('TOKEN: ', value)
-
     useEffect(() => {
         localStorage.setItem(key, value)
     }, [key, value])

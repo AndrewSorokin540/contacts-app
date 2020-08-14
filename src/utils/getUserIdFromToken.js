@@ -1,1 +1,0 @@
-export const getUserIdFromToken = (token) => JSON.parse(atob(token.split('.')[1])).sub

@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import { useLocalStorage } from 'hooks';
 
 const useFetch = (endpoint) => {
     const baseUrl = 'http://localhost:3001'
@@ -7,6 +8,7 @@ const useFetch = (endpoint) => {
     const [response, setResponse] = useState(null);
     const [error, setError] = useState(null);
     const [readyToFetching, setReadyToFetching] = useState(false);
+    const [token] = useLocalStorage('token');
 
     const doFetch = useCallback((options = {}) => {
         setOptions(options);
@@ -14,14 +16,21 @@ const useFetch = (endpoint) => {
     }, [])
 
     useEffect(() => {
+        const reqOptions = {
+            ...options,
+            headers: {
+                authorization: token ? `Bearer ${token}` : '',
+                ...options.headers
+            }
+        }
         if (readyToFetching) {
-            fetch(baseUrl + endpoint, options)
+            fetch(baseUrl + endpoint, reqOptions)
                 .then(res => res.json())
                 .then(data => setResponse(data))
                 .catch(err => setError(err))
                 .finally(() => setReadyToFetching(false))
         }
-    }, [endpoint, options, readyToFetching]);
+    }, [endpoint, options, readyToFetching, token]);
 
     return [{ response, error }, doFetch]
 }
