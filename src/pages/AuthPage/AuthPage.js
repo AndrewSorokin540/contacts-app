@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { Redirect } from 'react-router-dom';
 import { Form, Input, Button } from 'antd';
 import { useFetch, useLocalStorage } from 'hooks';
 import { CurrentUserContext } from 'contexts';
@@ -6,14 +7,13 @@ import { getUserFromToken } from 'utils';
 import { FormContainer } from './styled';
 
 const AuthPage = ({ match }) => {
-    const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const onRegisterPage = match.path === '/register';
     const fetchUrl = onRegisterPage ? '/register' : '/login'
-    const [{ response }, doFetch] = useFetch(fetchUrl);
+    const [{ response }, doFetch] = useFetch();
     const [, setToken] = useLocalStorage('token');
-    const [, setCurrentUserState] = useContext(CurrentUserContext);
+    const [{ isLoggenIn }, setCurrentUserState] = useContext(CurrentUserContext);
 
     const onFinish = () => {
         doFetch({
@@ -21,8 +21,8 @@ const AuthPage = ({ match }) => {
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
             },
-            body: JSON.stringify({ username, email, password })
-        })
+            body: JSON.stringify({ email, password })
+        }, fetchUrl)
     };
 
     useEffect(() => {
@@ -38,12 +38,13 @@ const AuthPage = ({ match }) => {
                 currentUser: {
                     ...state.currentUser,
                     email,
-                    username,
                     id: userId
                 }
             }))
         }
-    }, [response, setToken, email, username, setCurrentUserState])
+    }, [response, setToken, email, setCurrentUserState]);
+
+    if (isLoggenIn) return <Redirect to='/' />
 
     return (
         <FormContainer>
@@ -51,14 +52,6 @@ const AuthPage = ({ match }) => {
                 layout='vertical'
                 name="basic"
                 onFinish={onFinish}>
-                {onRegisterPage && (
-                    <Form.Item
-                        label="Имя"
-                        name="username"
-                        rules={[{ message: 'Please input your username!' }]}>
-                        <Input size="large" value={username} onChange={e => setUsername(e.target.value)} />
-                    </Form.Item>
-                )}
 
                 <Form.Item
                     name={['email']}

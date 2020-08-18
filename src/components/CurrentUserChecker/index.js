@@ -1,30 +1,27 @@
-import { useEffect, useContext, useState } from 'react';
+import { useEffect, useContext } from 'react';
 import { useLocalStorage, useFetch } from 'hooks';
 import { CurrentUserContext } from 'contexts';
 import { getUserFromToken } from 'utils';
 
-
 const CurrentUserChecker = ({ children }) => {
 
-    const [responseReceived, setResponseReceived] = useState(false)
     const [token] = useLocalStorage('token');
     const [userId] = getUserFromToken(token)
-    const [{ response }, doFetch] = useFetch(`/users/${userId}`)
+    const [{ response }, doFetch] = useFetch()
     const [, setCurrentUserState] = useContext(CurrentUserContext)
 
     useEffect(() => {
         if (token) {
-            doFetch();
+            doFetch({}, `/users/${userId}`);
             setCurrentUserState(state => ({
                 ...state,
                 loading: true
             }))
         }
-    }, [token, doFetch, setCurrentUserState])
+    }, [token, doFetch, setCurrentUserState, userId])
 
     useEffect(() => {
         if (response) {
-            setResponseReceived(true)
             setCurrentUserState(state => ({
                 ...state,
                 loading: false,
@@ -32,12 +29,11 @@ const CurrentUserChecker = ({ children }) => {
                 currentUser: {
                     ...state.currentUser,
                     email: response.email,
-                    username: response.username,
                     id: response.id
                 }
             }))
         }
-    }, [response, doFetch, responseReceived, setCurrentUserState])
+    }, [response, doFetch, setCurrentUserState])
 
     return children;
 }

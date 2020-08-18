@@ -1,17 +1,19 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useLocalStorage } from 'hooks';
 
-const useFetch = (endpoint) => {
+const useFetch = () => {
     const baseUrl = 'http://localhost:3001'
 
     const [options, setOptions] = useState({});
+    const [endpoint, setEndpoint] = useState('');
     const [response, setResponse] = useState(null);
     const [error, setError] = useState(null);
     const [readyToFetching, setReadyToFetching] = useState(false);
     const [token] = useLocalStorage('token');
 
-    const doFetch = useCallback((options = {}) => {
+    const doFetch = useCallback((options = {}, endpoint = ('')) => {
         setOptions(options);
+        setEndpoint(endpoint);
         setReadyToFetching(true);
     }, [])
 
