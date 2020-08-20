@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
-import { Spin } from 'antd';
+import { Spin, Button } from 'antd';
 import { Contact, AddContactForm } from 'components';
 import { useFetch } from 'hooks';
 import { CurrentUserContext } from 'contexts';
@@ -22,7 +22,6 @@ const ContactsPage = () => {
     }
 
     if (response) {
-        console.log('response', response)
         let contacts;
         if (response.contacts && response.contacts.length > 0) {
             contacts = response.contacts.map((contact, index) => (

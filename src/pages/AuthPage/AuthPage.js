@@ -31,12 +31,10 @@ const AuthPage = ({ match }) => {
             setToken(accessToken);
 
             const [userId] = getUserFromToken(accessToken)
-            setCurrentUserState(state => ({
-                ...state,
+            setCurrentUserState(() => ({
                 loading: false,
                 isLoggenIn: true,
                 currentUser: {
-                    ...state.currentUser,
                     email,
                     id: userId
                 }

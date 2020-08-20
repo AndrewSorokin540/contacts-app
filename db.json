@@ -62,6 +62,51 @@
               "value": "989898"
             }
           ]
+        },
+        {
+          "contactName": "Вальдемар",
+          "accounts": [
+            {
+              "type": "whatsApp",
+              "value": "100500"
+            }
+          ]
+        },
+        {
+          "contactName": "фывфыв",
+          "accounts": [
+            {
+              "type": "phone",
+              "value": "1000"
+            }
+          ]
+        },
+        {
+          "contactName": "gggg",
+          "accounts": [
+            {
+              "type": "phone",
+              "value": "445566"
+            }
+          ]
+        },
+        {
+          "contactName": "Кирилл",
+          "accounts": [
+            {
+              "type": "whatsApp",
+              "value": "8899"
+            }
+          ]
+        },
+        {
+          "contactName": "Иван",
+          "accounts": [
+            {
+              "type": "phone",
+              "value": "885566"
+            }
+          ]
         }
       ]
     }
