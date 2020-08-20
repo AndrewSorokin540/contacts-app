@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
-import { Spin, Button } from 'antd';
+import { Spin } from 'antd';
 import { Contact, AddContactForm } from 'components';
 import { useFetch } from 'hooks';
 import { CurrentUserContext } from 'contexts';
@@ -10,6 +10,22 @@ const ContactsPage = () => {
 
     const [{ isLoggenIn, currentUser }] = useContext(CurrentUserContext);
     const [{ response }, doFetch] = useFetch();
+
+    const onContactDelete = (contacts, removingIndex) => {
+        doFetch({
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({
+                contacts: [
+                    ...contacts.slice(0, removingIndex),
+                    ...contacts.slice(removingIndex + 1),
+                ]
+            })
+        }, (`/users/${currentUser.id}`))
+        console.log(111, response)
+    }
 
     useEffect(() => {
         if (isLoggenIn) {
@@ -25,7 +41,11 @@ const ContactsPage = () => {
         let contacts;
         if (response.contacts && response.contacts.length > 0) {
             contacts = response.contacts.map((contact, index) => (
-                <Contact key={contact.contactName + index} name={contact.contactName} accounts={contact.accounts} />
+                <Contact
+                    key={contact.contactName + index}
+                    name={contact.contactName}
+                    accounts={contact.accounts}
+                    onDelete={() => onContactDelete(response.contacts, index)} />
             ))
         } else {
             contacts = <h1>Добавьте ваш первый контакт:</h1>

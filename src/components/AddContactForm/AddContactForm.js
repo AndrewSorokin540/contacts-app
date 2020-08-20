@@ -5,7 +5,7 @@ import { useFetch } from 'hooks';
 
 const { Option } = Select;
 
-const AddContactForm = ({ contacts, userId }) => {
+const AddContactForm = ({ contacts = [], userId }) => {
     const [modalOpen, setModalOpen] = useState(false)
     const [newContactName, setNewContactName] = useState('Новый контакт');
     const [newContactType, setNewContactType] = useState('phone');

@@ -4,11 +4,21 @@ const Wrapper = styled.div`
     padding: 10px;
     margin: 10px;
     border: 1px solid #aaa;
-    font-size: calc(1rem + 2px)
+    font-size: calc(1rem + 2px);
+    position: relative;
 `;
 
 const ContactValue = styled.div`
     margin-left: 10px;
 `;
 
-export { Wrapper, ContactValue };
+const Delete = styled.div`
+    width: 30px;
+    height: 30px;
+    background-color:red;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+`;
+
+export { Wrapper, ContactValue, Delete };
