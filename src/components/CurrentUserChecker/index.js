@@ -22,6 +22,7 @@ const CurrentUserChecker = ({ children }) => {
 
     useEffect(() => {
         if (response) {
+            console.log(123, response)
             setCurrentUserState(state => ({
                 ...state,
                 loading: false,
@@ -29,7 +30,8 @@ const CurrentUserChecker = ({ children }) => {
                 currentUser: {
                     ...state.currentUser,
                     email: response.email,
-                    id: response.id
+                    id: response.id,
+                    contacts: response.contacts
                 }
             }))
         }

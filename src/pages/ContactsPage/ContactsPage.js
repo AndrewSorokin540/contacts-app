@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Spin } from 'antd';
-import { Contact } from 'components';
+import { Contact, AddContactForm } from 'components';
 import { useFetch } from 'hooks';
 import { CurrentUserContext } from 'contexts';
 import { Flex } from 'styled';
@@ -22,11 +22,19 @@ const ContactsPage = () => {
     }
 
     if (response) {
-        console.log(response)
-        if (response.contacts.length > 0) {
-            return <Contact user={response} />
+        console.log('response', response)
+        let contacts;
+        if (response.contacts && response.contacts.length > 0) {
+            contacts = response.contacts.map((contact, index) => (
+                <Contact key={contact.contactName + index} name={contact.contactName} accounts={contact.accounts} />
+            ))
+        } else {
+            contacts = <h1>Добавьте ваш первый контакт:</h1>
         }
-        return <div>У вас пока нет контактов</div>
+        return <>
+            {contacts}
+            <AddContactForm contacts={response.contacts} userId={currentUser.id} />
+        </>
     }
 
     return (

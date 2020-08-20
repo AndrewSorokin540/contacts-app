@@ -1,134 +1,69 @@
 {
   "users": [
     {
-      "id": 1,
-      "email": "vasya@mail.ru",
-      "password": 1234,
-      "username": "Василий Рогов",
-      "contacts": [
-        {
-          "name": "Толян",
-          "items": [
-            {
-              "type": "phone",
-              "value": 88002000600
-            },
-            {
-              "type": "whatsApp",
-              "value": 88002000600
-            }
-          ]
-        },
-        {
-          "name": "Георгич",
-          "items": [
-            {
-              "type": "phone",
-              "value": 89501459657
-            },
-            {
-              "type": "whatsApp",
-              "value": 89501459657
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": 2,
-      "email": "strongtolyan@yandex.ru",
-      "password": 100500,
-      "username": "Анатолий Дукалис",
-      "contacts": [
-        {
-          "name": "Вася",
-          "items": [
-            {
-              "type": "phone",
-              "value": 86547896214
-            },
-            {
-              "type": "whatsApp",
-              "value": 86547896214
-            }
-          ]
-        },
-        {
-          "name": "Георгич",
-          "items": [
-            {
-              "type": "phone",
-              "value": 89501459657
-            },
-            {
-              "type": "whatsApp",
-              "value": 89501459657
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": 3,
-      "email": "maningray@yandex.ru",
-      "password": 5555,
-      "username": "Георгич",
-      "contacts": [
-        {
-          "name": "Толя",
-          "items": [
-            {
-              "type": "phone",
-              "value": 88002000600
-            },
-            {
-              "type": "whatsApp",
-              "value": 88002000600
-            }
-          ]
-        },
-        {
-          "name": "Рогов",
-          "items": [
-            {
-              "type": "phone",
-              "value": 86547896214
-            },
-            {
-              "type": "whatsApp",
-              "value": 86547896214
-            }
-          ]
-        }
-      ]
-    },
-    {
       "email": "xxxx@gmail.com",
-      "password": "$2a$10$SDk45NiTv1D8fE./pJ4ok.CqlplwhoWPLjkrvnXvpKcCCDquQfzpS",
-      "id": 4
-    },
-    {
-      "email": "zzzz@gmail.com",
-      "password": "$2a$10$8oLGIwlCESybuNNg/slRfORhbnqRhV6t0WDKNE/bsCP6x.Keipei.",
+      "password": "$2a$10$HZou9dw6NMZl87BA6Hp/YOjvvEcpy3OtX/CZJ7b9aVO/otR4JwijK",
+      "id": 1,
       "contacts": [
         {
-          "items": [
+          "contactName": "Васёк",
+          "accounts": [
+            {
+              "type": "phone",
+              "value": 86547896214
+            },
             {
               "type": "whatsApp",
-              "value": "888"
+              "value": 86547896214
             }
           ]
         },
         {
-          "items": [
+          "contactName": "New contact",
+          "accounts": [
             {
               "type": "phone",
-              "value": "222"
+              "value": "100500"
+            }
+          ]
+        },
+        {
+          "contactName": "New contact",
+          "accounts": [
+            {
+              "type": "phone",
+              "value": "500500"
+            }
+          ]
+        },
+        {
+          "contactName": "New contact",
+          "accounts": [
+            {
+              "type": "phone",
+              "value": "8888"
+            }
+          ]
+        },
+        {
+          "contactName": "тошик",
+          "accounts": [
+            {
+              "type": "phone",
+              "value": "777"
+            }
+          ]
+        },
+        {
+          "contactName": "Вован",
+          "accounts": [
+            {
+              "type": "phone",
+              "value": "989898"
             }
           ]
         }
-      ],
-      "id": 5
+      ]
     }
   ]
 }
