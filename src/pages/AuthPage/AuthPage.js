@@ -11,35 +11,30 @@ const AuthPage = ({ match }) => {
     const [password, setPassword] = useState('');
     const onRegisterPage = match.path === '/register';
     const fetchUrl = onRegisterPage ? '/register' : '/login'
-    const [{ response }, doFetch] = useFetch();
+    const [{ response }, doFetch] = useFetch(fetchUrl);
     const [, setToken] = useLocalStorage('token');
     const [{ isLoggenIn }, setCurrentUserState] = useContext(CurrentUserContext);
 
     const onFinish = () => {
         doFetch({
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8'
-            },
             body: JSON.stringify({ email, password })
-        }, fetchUrl)
+        })
     };
 
     useEffect(() => {
-        if (response && response.accessToken) {
-            const { accessToken } = response;
-            setToken(accessToken);
+        if (!response) return;
 
-            const [userId] = getUserFromToken(accessToken)
-            setCurrentUserState(() => ({
-                loading: false,
-                isLoggenIn: true,
-                currentUser: {
-                    email,
-                    id: userId
-                }
-            }))
-        }
+        setToken(response.accessToken);
+
+        setCurrentUserState(() => ({
+            loading: false,
+            isLoggenIn: true,
+            currentUser: {
+                email,
+                id: getUserFromToken(response.accessToken)
+            }
+        }))
     }, [response, setToken, email, setCurrentUserState]);
 
     if (isLoggenIn) return <Redirect to='/' />

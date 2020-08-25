@@ -22,6 +22,7 @@ const useFetch = endpoint => {
             ...options,
             headers: {
                 authorization: token ? `Bearer ${token}` : '',
+                'Content-Type': 'application/json;charset=utf-8',
                 ...options.headers
             }
         }
@@ -32,7 +33,7 @@ const useFetch = endpoint => {
             .catch(err => setError(err))
             .finally(() => setIsLoading(false))
 
-    }, [endpoint, options, token]);
+    }, [endpoint, options, token, isLoading]);
 
     return [{ response, error, isLoading }, doFetch]
 }
