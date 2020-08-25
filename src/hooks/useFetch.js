@@ -1,23 +1,23 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useLocalStorage } from 'hooks';
 
-const useFetch = () => {
+const useFetch = endpoint => {
     const baseUrl = 'http://localhost:3001'
 
     const [options, setOptions] = useState({});
-    const [endpoint, setEndpoint] = useState('');
     const [response, setResponse] = useState(null);
     const [error, setError] = useState(null);
-    const [readyToFetching, setReadyToFetching] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const [token] = useLocalStorage('token');
 
-    const doFetch = useCallback((options = {}, endpoint = ('')) => {
+    const doFetch = useCallback((options = {}) => {
         setOptions(options);
-        setEndpoint(endpoint);
-        setReadyToFetching(true);
+        setIsLoading(true);
     }, [])
 
     useEffect(() => {
+        if (!isLoading) return;
+
         const reqOptions = {
             ...options,
             headers: {
@@ -25,16 +25,16 @@ const useFetch = () => {
                 ...options.headers
             }
         }
-        if (readyToFetching) {
-            fetch(baseUrl + endpoint, reqOptions)
-                .then(res => res.json())
-                .then(data => setResponse(data))
-                .catch(err => setError(err))
-                .finally(() => setReadyToFetching(false))
-        }
-    }, [endpoint, options, readyToFetching, token]);
 
-    return [{ response, error }, doFetch]
+        fetch(baseUrl + endpoint, reqOptions)
+            .then(res => res.json())
+            .then(data => setResponse(data))
+            .catch(err => setError(err))
+            .finally(() => setIsLoading(false))
+
+    }, [endpoint, options, token]);
+
+    return [{ response, error, isLoading }, doFetch]
 }
 
 export default useFetch;

@@ -31,20 +31,11 @@
       "id": 2,
       "contacts": [
         {
-          "contactName": "yyyy",
+          "contactName": "yyyyy",
           "accounts": [
             {
               "type": "whatsApp",
-              "value": "1111"
-            }
-          ]
-        },
-        {
-          "contactName": "eeee",
-          "accounts": [
-            {
-              "type": "phone",
-              "value": "3333"
+              "value": "55555"
             }
           ]
         }

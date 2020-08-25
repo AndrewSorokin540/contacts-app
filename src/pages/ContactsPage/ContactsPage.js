@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Spin } from 'antd';
-import { Contact, AddContactForm } from 'components';
+import { Contact, AddContact } from 'components';
 import { useFetch } from 'hooks';
 import { CurrentUserContext } from 'contexts';
 import { Flex } from 'styled';
@@ -11,7 +11,7 @@ const ContactsPage = () => {
     const [{ isLoggenIn, currentUser }] = useContext(CurrentUserContext);
     const [{ response }, doFetch] = useFetch();
 
-    const onContactDelete = (contacts, removingIndex) => {
+    const onContactDelete = (contacts, removingContactIndex) => {
         doFetch({
             method: 'PATCH',
             headers: {
@@ -19,12 +19,16 @@ const ContactsPage = () => {
             },
             body: JSON.stringify({
                 contacts: [
-                    ...contacts.slice(0, removingIndex),
-                    ...contacts.slice(removingIndex + 1),
+                    ...contacts.slice(0, removingContactIndex),
+                    ...contacts.slice(removingContactIndex + 1),
                 ]
             })
         }, (`/users/${currentUser.id}`))
         console.log(111, response)
+    }
+
+    const onContactEdit = (contacts, editedContactIndex, newContact) => {
+
     }
 
     useEffect(() => {
@@ -45,14 +49,15 @@ const ContactsPage = () => {
                     key={contact.contactName + index}
                     name={contact.contactName}
                     accounts={contact.accounts}
-                    onDelete={() => onContactDelete(response.contacts, index)} />
+                    onDelete={() => onContactDelete(response.contacts, index)}
+                    onEdit={() => onContactEdit(response.contacts, index)} />
             ))
         } else {
             contacts = <h1>Добавьте ваш первый контакт:</h1>
         }
         return <>
             {contacts}
-            <AddContactForm contacts={response.contacts} userId={currentUser.id} />
+            <AddContact contacts={response.contacts} userId={currentUser.id} />
         </>
     }
 

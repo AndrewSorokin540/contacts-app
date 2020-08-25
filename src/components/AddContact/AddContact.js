@@ -5,14 +5,13 @@ import { useFetch } from 'hooks';
 
 const { Option } = Select;
 
-const AddContactForm = ({ contacts = [], userId }) => {
+const AddContact = ({ contacts = [], userId }) => {
     const [modalOpen, setModalOpen] = useState(false)
-    const [newContactName, setNewContactName] = useState('Новый контакт');
+    const [newContactName, setNewContactName] = useState('');
     const [newContactType, setNewContactType] = useState('phone');
     const [newContactValue, setNewContactValue] = useState(null);
     const [{ response }, doFetch] = useFetch();
     const [, setUserContext] = useContext(CurrentUserContext);
-    console.log('response on contact send', response);
 
     const onCancel = () => {
         setModalOpen(false)
@@ -52,7 +51,10 @@ const AddContactForm = ({ contacts = [], userId }) => {
                 }
             }))
         }
-    }, [response])
+        setNewContactName('')
+        setNewContactType('phone')
+        setNewContactValue(null)
+    }, [response, setUserContext])
 
     return (
         <>
@@ -60,6 +62,7 @@ const AddContactForm = ({ contacts = [], userId }) => {
             <Modal
                 title="Добавить контакт"
                 visible={modalOpen}
+                onCancel={onCancel}
                 footer={[
                     <Button key="back" onClick={onCancel}>
                         Отмена
@@ -70,7 +73,7 @@ const AddContactForm = ({ contacts = [], userId }) => {
                 ]}>
                 <Form layout='vertical' name="newContact" wrapperCol={{ span: 24 }}>
                     <Form.Item >
-                        <Input onChange={e => setNewContactName(e.target.value)} placeholder='Имя контакта' />
+                        <Input value={newContactName} onChange={e => setNewContactName(e.target.value)} placeholder='Имя контакта' />
                     </Form.Item>
                     <Form.Item >
                         <Input.Group compact>
@@ -78,7 +81,7 @@ const AddContactForm = ({ contacts = [], userId }) => {
                                 <Option value="phone">Телефон</Option>
                                 <Option value="whatsApp">WhatsApp</Option>
                             </Select>
-                            <Input style={{ width: '70%' }} onChange={e => setNewContactValue(e.target.value)} placeholder={newContactType === 'phone' ? 'Телефон' : 'Аккаунт WhatsApp'} />
+                            <Input value={newContactValue} style={{ width: '70%' }} onChange={e => setNewContactValue(e.target.value)} placeholder={newContactType === 'phone' ? 'Телефон' : 'Аккаунт WhatsApp'} />
                         </Input.Group>
                     </Form.Item>
                 </Form>
@@ -87,4 +90,4 @@ const AddContactForm = ({ contacts = [], userId }) => {
     )
 }
 
-export default AddContactForm;
+export default AddContact;

@@ -21,4 +21,13 @@ const Delete = styled.div`
     top: 5px;
 `;
 
-export { Wrapper, ContactValue, Delete };
+const Edit = styled.div`
+    width: 30px;
+    height: 30px;
+    background-color:green;
+    position: absolute;
+    right: 5px;
+    top: 45px;
+`;
+
+export { Wrapper, ContactValue, Delete, Edit };
