@@ -13,14 +13,14 @@ const ContactsPage = () => {
 
     const currentUserContacts = response ? response.contacts : currentUser.contacts;
 
-    const onContactAdd = contactName => {
+    const onContactAdd = (contactName, accounts, index) => {
         doFetch({
             method: 'PATCH',
             body: JSON.stringify({
                 contacts:
                     [
                         ...currentUserContacts,
-                        { contactName }
+                        { contactName, accounts }
                     ]
             })
         })
@@ -39,14 +39,14 @@ const ContactsPage = () => {
         })
     }
 
-    const onContactEdit = (contactName, index) => {
+    const onContactEdit = (contactName, accounts, index) => {
         doFetch({
             method: 'PATCH',
             body: JSON.stringify({
                 contacts:
                     [
                         ...currentUserContacts.slice(0, index),
-                        { contactName },
+                        { contactName, accounts },
                         ...currentUserContacts.slice(index + 1),
                     ]
             })
@@ -66,7 +66,9 @@ const ContactsPage = () => {
                     name={contact.contactName}
                     onDelete={() => onContactDelete(index)}
                     onEdit={onContactEdit}
-                    index={index} />
+                    index={index}
+                    accounts={contact.accounts ? contact.accounts : []}
+                />
             ))
         } else {
             contacts = <h1>Добавьте ваш первый контакт:</h1>
@@ -77,6 +79,7 @@ const ContactsPage = () => {
                 title="Добавить контакт"
                 icon={<PlusSquareOutlined />} buttonType='primary'
                 onSubmit={onContactAdd}
+                accounts={[]}
             />
         </>
     }

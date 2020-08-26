@@ -6,19 +6,11 @@ const Wrapper = styled.div`
     border: 1px solid #aaa;
     font-size: calc(1rem + 2px);
     position: relative;
+    background-color: #fff;
 `;
 
 const ContactValue = styled.div`
     margin-left: 10px;
-`;
-
-const Delete = styled.div`
-    width: 30px;
-    height: 30px;
-    background-color:red;
-    position: absolute;
-    right: 5px;
-    top: 5px;
 `;
 
 const Edit = styled.div`
@@ -30,4 +22,4 @@ const Edit = styled.div`
     top: 45px;
 `;
 
-export { Wrapper, ContactValue, Delete, Edit };
+export { Wrapper, ContactValue, Edit };

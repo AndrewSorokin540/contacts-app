@@ -95,10 +95,14 @@
       "id": 7,
       "contacts": [
         {
-          "contactName": "112"
-        },
-        {
-          "contactName": "Вася"
+          "contactName": "vasya",
+          "accounts": {
+            "phone": "02",
+            "whatsApp": "WhatsAPPPPP",
+            "email": "",
+            "skype": "",
+            "github": "as"
+          }
         }
       ]
     }
