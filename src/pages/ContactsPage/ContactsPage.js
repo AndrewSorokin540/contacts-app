@@ -24,23 +24,31 @@ const ContactsPage = () => {
         })
     }
 
-    const onContactDelete = contactName => {
-        const deletedContactIndex = currentUserContacts
-            .findIndex(contact => contact.contactName === contactName)
+    const onContactDelete = index => {
         doFetch({
             method: 'PATCH',
             body: JSON.stringify({
                 contacts:
                     [
-                        ...currentUserContacts.slice(0, deletedContactIndex),
-                        ...currentUserContacts.slice(deletedContactIndex + 1),
+                        ...currentUserContacts.slice(0, index),
+                        ...currentUserContacts.slice(index + 1),
                     ]
             })
         })
     }
 
-    const onContactEdit = contactName => {
-        console.log(contactName)
+    const onContactEdit = (contactName, index) => {
+        doFetch({
+            method: 'PATCH',
+            body: JSON.stringify({
+                contacts:
+                    [
+                        ...currentUserContacts.slice(0, index),
+                        { contactName },
+                        ...currentUserContacts.slice(index + 1),
+                    ]
+            })
+        })
     }
 
     if (!isLoggenIn) {
@@ -54,9 +62,9 @@ const ContactsPage = () => {
                 <Contact
                     key={contact.contactName + index}
                     name={contact.contactName}
-                    accounts={contact.accounts}
-                    onDelete={() => onContactDelete(contact.contactName)}
-                    onEdit={onContactEdit} />
+                    onDelete={() => onContactDelete(index)}
+                    onEdit={onContactEdit}
+                    index={index} />
             ))
         } else {
             contacts = <h1>Добавьте ваш первый контакт:</h1>

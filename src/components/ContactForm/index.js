@@ -3,14 +3,15 @@ import { Form, Input, Button, Select, Modal } from 'antd';
 
 const { Option } = Select;
 
-const ContactForm = ({ contact, title, onSubmit }) => {
+const ContactForm = ({ title, onSubmit, index, contactName: name = '' }) => {
 
     const [modalOpen, setModalOpen] = useState(false);
-    const [contactName, setContactName] = useState('');
+    const [contactName, setContactName] = useState(name);
 
     const onOk = () => {
-        onSubmit(contactName);
+        onSubmit(contactName, index);
         setModalOpen(false);
+        setContactName('');
     }
 
     return (
