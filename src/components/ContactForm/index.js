@@ -11,8 +11,6 @@ import {
 
 const ContactForm = ({ title, icon, buttonType, onSubmit, index, contactName: name = '', accounts }) => {
 
-    console.log('accounts', accounts)
-
     const [modalOpen, setModalOpen] = useState(false);
     const [contactName, setContactName] = useState(name);
     const [phone, setPhone] = useState(accounts.phone ? accounts.phone : '');
@@ -25,6 +23,11 @@ const ContactForm = ({ title, icon, buttonType, onSubmit, index, contactName: na
         onSubmit(contactName, { phone, whatsApp, email, skype, github }, index);
         setModalOpen(false);
         setContactName('');
+        setPhone('');
+        setWhatsApp('');
+        setEmail('');
+        setSkype('');
+        setGithub('');
     }
 
     return (
@@ -39,7 +42,7 @@ const ContactForm = ({ title, icon, buttonType, onSubmit, index, contactName: na
                         Отмена
                     </Button>,
                     <Button key="submit" type="primary" onClick={onOk}>
-                        Добавить
+                        Ок
                     </Button>
                 ]}>
                 <Form layout='horizontal' name="newContact" >

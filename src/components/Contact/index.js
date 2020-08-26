@@ -14,8 +14,6 @@ import { Wrapper } from './styled';
 
 const Contact = ({ name, accounts, onDelete, onEdit, ...other }) => {
 
-    console.log(accounts)
-
     const mapTypeToIcon = (type) => {
         switch (type) {
             case 'phone':

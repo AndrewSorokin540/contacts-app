@@ -103,6 +103,63 @@
             "skype": "",
             "github": "as"
           }
+        },
+        {
+          "contactName": "Коля",
+          "accounts": {
+            "phone": "756954",
+            "whatsApp": "",
+            "email": "",
+            "skype": "",
+            "github": ""
+          }
+        },
+        {
+          "contactName": "Петя",
+          "accounts": {
+            "phone": "889966",
+            "whatsApp": "",
+            "email": "",
+            "skype": "Petya",
+            "github": ""
+          }
+        }
+      ]
+    },
+    {
+      "email": "flegen@rambler.ru",
+      "password": "$2a$10$8aSi0FpMxaBiv0PC3.4pRubYjEAcCt3gBwZTrbEudTp6bOQuOuJ6S",
+      "id": 8,
+      "contacts": [
+        {
+          "contactName": "фыва",
+          "accounts": {
+            "phone": "фыва",
+            "whatsApp": "фыва",
+            "email": "",
+            "skype": "",
+            "github": ""
+          }
+        },
+        {
+          "contactName": "sdfsdf",
+          "accounts": {
+            "phone": "фыва",
+            "whatsApp": "фыва",
+            "email": "фыва",
+            "skype": "фыва",
+            "github": "фыва"
+          }
+        },
+        {
+          "contactName": "asfd",
+          "accounts": {
+            "phone": "asdf",
+            "whatsApp": "",
+            "email": "gl",
+            "skype": "shasd",
+            "github": "asdfg"
+          }
         }
       ]
     }

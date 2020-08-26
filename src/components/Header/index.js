@@ -14,7 +14,9 @@ const Header = () => {
 
     const onExit = () => {
         setCurrentUserState({
-            currentUser: null,
+            currentUser: {
+                contacts: []
+            },
             isLoggenIn: false,
             loading: false
         });

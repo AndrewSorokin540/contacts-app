@@ -59,7 +59,7 @@ const ContactsPage = () => {
 
     if (currentUser) {
         let contacts;
-        if (currentUserContacts.length > 0) {
+        if (currentUserContacts && currentUserContacts.length > 0) {
             contacts = currentUserContacts.map((contact, index) => (
                 <Contact
                     key={contact.contactName + index}
