@@ -3,7 +3,7 @@ import { Form, Input, Button, Select, Modal } from 'antd';
 
 const { Option } = Select;
 
-const ContactForm = ({ title, onSubmit, index, contactName: name = '' }) => {
+const ContactForm = ({ title, icon, buttonType, onSubmit, index, contactName: name = '' }) => {
 
     const [modalOpen, setModalOpen] = useState(false);
     const [contactName, setContactName] = useState(name);
@@ -16,7 +16,7 @@ const ContactForm = ({ title, onSubmit, index, contactName: name = '' }) => {
 
     return (
         <>
-            <Button onClick={() => setModalOpen(true)}>{title}</Button>
+            <Button type={buttonType} onClick={() => setModalOpen(true)} icon={icon}>{title}</Button>
             <Modal
                 title="Добавить контакт"
                 visible={modalOpen}

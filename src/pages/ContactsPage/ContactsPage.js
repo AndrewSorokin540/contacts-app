@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
+import { PlusSquareOutlined } from '@ant-design/icons';
+
 import { Contact, ContactForm } from 'components';
 import { useFetch } from 'hooks';
 import { CurrentUserContext } from 'contexts';
@@ -71,7 +73,11 @@ const ContactsPage = () => {
         }
         return <>
             {contacts}
-            <ContactForm title="Add" onSubmit={onContactAdd} />
+            <ContactForm
+                title="Добавить контакт"
+                icon={<PlusSquareOutlined />} buttonType='primary'
+                onSubmit={onContactAdd}
+            />
         </>
     }
 }

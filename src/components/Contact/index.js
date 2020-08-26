@@ -1,5 +1,6 @@
 import React from 'react';
-import { PhoneOutlined, WhatsAppOutlined } from '@ant-design/icons';
+import { Button } from 'antd';
+import { PhoneOutlined, WhatsAppOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { ContactForm } from 'components';
 import { Wrapper, Delete } from './styled';
 
@@ -21,8 +22,14 @@ const Contact = ({ name, accounts, onDelete, onEdit, ...other }) => {
     return (
         <Wrapper>
             <h4>{name}</h4>
-            <Delete onClick={onDelete} />
-            <ContactForm title='Edit' onSubmit={onEdit} contactName={name} {...other} />
+            <Button danger icon={<DeleteOutlined />} onClick={onDelete}>Удалить</Button>
+            <ContactForm
+                title='Редактировать'
+                icon={<EditOutlined />}
+                onSubmit={onEdit}
+                contactName={name}
+                {...other}
+            />
         </Wrapper >
     );
 }
