@@ -6,32 +6,25 @@ import { getUserFromToken } from 'utils';
 const CurrentUserChecker = ({ children }) => {
 
     const [token] = useLocalStorage('token');
-    const [userId] = getUserFromToken(token)
-    const [{ response }, doFetch] = useFetch()
-    const [, setCurrentUserState] = useContext(CurrentUserContext)
+    const [userId] = getUserFromToken(token);
+    const [{ response }, doFetch] = useFetch(`/users/${userId}`);
+    const [, setCurrentUserState] = useContext(CurrentUserContext);
 
     useEffect(() => {
         if (token) {
-            doFetch({}, `/users/${userId}`);
-            setCurrentUserState(state => ({
-                ...state,
-                loading: true
-            }))
+            doFetch();
         }
     }, [token, doFetch, setCurrentUserState, userId])
 
     useEffect(() => {
         if (response) {
-            console.log(123, response)
             setCurrentUserState(state => ({
                 ...state,
-                loading: false,
                 isLoggenIn: true,
                 currentUser: {
-                    ...state.currentUser,
                     email: response.email,
                     id: response.id,
-                    contacts: response.contacts
+                    contacts: response.contacts ? response.contacts : []
                 }
             }))
         }

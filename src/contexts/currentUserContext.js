@@ -6,9 +6,11 @@ const CurrentUserProvider = ({ children }) => {
     const [state, setState] = useState({
         loading: false,
         isLoggenIn: null,
-        currentUser: null
+        currentUser: {
+            contacts: []
+        }
     })
-    console.log('CURRENT_USER_CONTEXT', state);
+
     return (
         <CurrentUserContext.Provider value={[state, setState]}>
             {children}

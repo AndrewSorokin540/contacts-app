@@ -4,6 +4,6 @@ import Footer from './Footer';
 import Contact from './Contact';
 import CurrentUserChecker from './CurrentUserChecker';
 import AddContact from './AddContact';
-import EditContact from './EditContact';
+import ContactForm from './ContactForm';
 
-export { Header, Body, Footer, Contact, CurrentUserChecker, AddContact, EditContact };
+export { Header, Body, Footer, Contact, CurrentUserChecker, AddContact, ContactForm };

@@ -1,71 +1,71 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
-import { Spin } from 'antd';
-import { Contact, AddContact } from 'components';
+import { Contact, ContactForm } from 'components';
 import { useFetch } from 'hooks';
 import { CurrentUserContext } from 'contexts';
-import { Flex } from 'styled';
 
 const ContactsPage = () => {
 
     const [{ isLoggenIn, currentUser }] = useContext(CurrentUserContext);
-    const [{ response }, doFetch] = useFetch();
+    const [{ response }, doFetch] = useFetch(`/users/${currentUser && currentUser.id}`);
 
-    const onContactDelete = (contacts, removingContactIndex) => {
+    const currentUserContacts = response ? response.contacts : currentUser.contacts;
+
+    const onContactAdd = contactName => {
         doFetch({
             method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8'
-            },
             body: JSON.stringify({
-                contacts: [
-                    ...contacts.slice(0, removingContactIndex),
-                    ...contacts.slice(removingContactIndex + 1),
-                ]
+                contacts:
+                    [
+                        ...currentUserContacts,
+                        { contactName }
+                    ]
             })
-        }, (`/users/${currentUser.id}`))
-        console.log(111, response)
+        })
     }
 
-    const onContactEdit = (contacts, editedContactIndex, newContact) => {
-
+    const onContactDelete = contactName => {
+        const deletedContactIndex = currentUserContacts
+            .findIndex(contact => contact.contactName === contactName)
+        doFetch({
+            method: 'PATCH',
+            body: JSON.stringify({
+                contacts:
+                    [
+                        ...currentUserContacts.slice(0, deletedContactIndex),
+                        ...currentUserContacts.slice(deletedContactIndex + 1),
+                    ]
+            })
+        })
     }
 
-    useEffect(() => {
-        if (isLoggenIn) {
-            doFetch({}, (`/users/${currentUser.id}`))
-        }
-    }, [doFetch, currentUser, isLoggenIn])
+    const onContactEdit = contactName => {
+        console.log(contactName)
+    }
 
     if (!isLoggenIn) {
         return <Redirect to='/login' />
     }
 
-    if (response) {
+    if (currentUser) {
         let contacts;
-        if (response.contacts && response.contacts.length > 0) {
-            contacts = response.contacts.map((contact, index) => (
+        if (currentUserContacts.length > 0) {
+            contacts = currentUserContacts.map((contact, index) => (
                 <Contact
                     key={contact.contactName + index}
                     name={contact.contactName}
                     accounts={contact.accounts}
-                    onDelete={() => onContactDelete(response.contacts, index)}
-                    onEdit={() => onContactEdit(response.contacts, index)} />
+                    onDelete={() => onContactDelete(contact.contactName)}
+                    onEdit={onContactEdit} />
             ))
         } else {
             contacts = <h1>Добавьте ваш первый контакт:</h1>
         }
         return <>
             {contacts}
-            <AddContact contacts={response.contacts} userId={currentUser.id} />
+            <ContactForm title="Add" onSubmit={onContactAdd} />
         </>
     }
-
-    return (
-        <Flex justifyCenter style={{ marginTop: '50px' }}>
-            <Spin size="large" />
-        </Flex>
-    )
 }
 
 export default ContactsPage;

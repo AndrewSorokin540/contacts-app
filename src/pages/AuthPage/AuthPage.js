@@ -16,6 +16,7 @@ const AuthPage = ({ match }) => {
     const [{ isLoggenIn }, setCurrentUserState] = useContext(CurrentUserContext);
 
     const onFinish = () => {
+
         doFetch({
             method: 'POST',
             body: JSON.stringify({ email, password })
