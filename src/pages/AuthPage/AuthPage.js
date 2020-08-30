@@ -13,7 +13,7 @@ const AuthPage = ({ match }) => {
     const fetchUrl = onRegisterPage ? '/register' : '/login'
     const [{ response }, doFetch] = useFetch(fetchUrl);
     const [, setToken] = useLocalStorage('token');
-    const [{ isLoggenIn }, setCurrentUserState] = useContext(CurrentUserContext);
+    const [{ isLoggenIn }, dispatch] = useContext(CurrentUserContext);
 
     const onFinish = () => {
 
@@ -26,17 +26,17 @@ const AuthPage = ({ match }) => {
     useEffect(() => {
         if (!response) return;
 
-        setToken(response.accessToken);
+        const [id] = getUserFromToken(response.accessToken)
+        console.log(111111, response)
 
-        setCurrentUserState(() => ({
-            loading: false,
-            isLoggenIn: true,
-            currentUser: {
-                email,
-                id: getUserFromToken(response.accessToken)
-            }
-        }))
-    }, [response, setToken, email, setCurrentUserState]);
+        setToken(response.accessToken);
+        dispatch({
+            type: 'SET_AUTHORIZED',
+            payload: { email, id }
+        })
+        dispatch({ type: 'LOADING_DONE' })
+
+    }, [response, setToken, email, dispatch]);
 
     if (isLoggenIn) return <Redirect to='/' />
 

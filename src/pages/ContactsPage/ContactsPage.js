@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import { PlusSquareOutlined } from '@ant-design/icons';
 
@@ -52,6 +52,12 @@ const ContactsPage = () => {
             })
         })
     }
+
+    useEffect(() => {
+        if (!currentUser.contacts) {
+            doFetch()
+        }
+    }, [currentUser.contacts])
 
     if (!isLoggenIn) {
         return <Redirect to='/login' />

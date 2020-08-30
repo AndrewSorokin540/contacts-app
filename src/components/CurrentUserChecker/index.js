@@ -8,27 +8,29 @@ const CurrentUserChecker = ({ children }) => {
     const [token] = useLocalStorage('token');
     const [userId] = getUserFromToken(token);
     const [{ response }, doFetch] = useFetch(`/users/${userId}`);
-    const [, setCurrentUserState] = useContext(CurrentUserContext);
+    const [, dispatch] = useContext(CurrentUserContext);
 
     useEffect(() => {
         if (token) {
+            dispatch({ type: 'LOADING_START' })
             doFetch();
         }
-    }, [token, doFetch, setCurrentUserState, userId])
+    }, [token, doFetch, dispatch])
 
     useEffect(() => {
         if (response) {
-            setCurrentUserState(state => ({
-                ...state,
-                isLoggenIn: true,
-                currentUser: {
+            console.log(2222222, response)
+            dispatch({
+                type: 'SET_AUTHORIZED',
+                payload: {
                     email: response.email,
                     id: response.id,
                     contacts: response.contacts ? response.contacts : []
                 }
-            }))
+            })
+            dispatch({ type: 'LOADING_DONE' })
         }
-    }, [response, doFetch, setCurrentUserState])
+    }, [response, doFetch, dispatch])
 
     return children;
 }

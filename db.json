@@ -142,16 +142,6 @@
           }
         },
         {
-          "contactName": "sdfsdf",
-          "accounts": {
-            "phone": "фыва",
-            "whatsApp": "фыва",
-            "email": "фыва",
-            "skype": "фыва",
-            "github": "фыва"
-          }
-        },
-        {
           "contactName": "asfd",
           "accounts": {
             "phone": "asdf",
@@ -159,6 +149,33 @@
             "email": "gl",
             "skype": "shasd",
             "github": "asdfg"
+          }
+        },
+        {
+          "contactName": "мое приложение для контактов",
+          "accounts": {
+            "phone": "2222",
+            "whatsApp": "22222222",
+            "email": "222222",
+            "skype": "22222222",
+            "github": ""
+          }
+        }
+      ]
+    },
+    {
+      "email": "jjjj@gmail.com",
+      "password": "$2a$10$OioPBMMW4SDE1ShNuPFO3uGC77dbZV9epI/0j8YETUodyFJmufvbm",
+      "id": 9,
+      "contacts": [
+        {
+          "contactName": "vasya",
+          "accounts": {
+            "phone": "555",
+            "whatsApp": "666",
+            "email": "",
+            "skype": "",
+            "github": ""
           }
         }
       ]

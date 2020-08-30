@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, List, Avatar } from 'antd';
+import { Button, List } from 'antd';
 import {
     PhoneOutlined,
     WhatsAppOutlined,
@@ -37,15 +37,13 @@ const Contact = ({ name, accounts, onDelete, onEdit, ...other }) => {
             <h4>{name}</h4>
             <List itemLayout="vertical">
                 {
-                    Object.keys(accounts).map(key => {
-                        if (accounts[key]) {
-                            return (
-                                <List.Item key={key}>
-                                    {mapTypeToIcon(key)} : {accounts[key]}
-                                </List.Item>
-                            )
-                        }
-                    })
+                    Object.keys(accounts)
+                        .filter(key => accounts[key])
+                        .map(key => (
+                            <List.Item key={key}>
+                                {mapTypeToIcon(key)} : {accounts[key]}
+                            </List.Item>
+                        ))
                 }
             </List>
             <Button danger icon={<DeleteOutlined />} onClick={onDelete}>Удалить</Button>

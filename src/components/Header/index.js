@@ -9,19 +9,13 @@ const { SubMenu } = Menu;
 
 const Header = () => {
     const [, setToken] = useLocalStorage('token');
-    const [currentUserState, setCurrentUserState] = useContext(CurrentUserContext);
-    const { isLoggenIn, currentUser } = currentUserState;
+    const [{ isLoggenIn, currentUser }, dispatch] = useContext(CurrentUserContext);
 
     const onExit = () => {
-        setCurrentUserState({
-            currentUser: {
-                contacts: []
-            },
-            isLoggenIn: false,
-            loading: false
-        });
+        dispatch({ type: 'SET_UNAUTHORIZED' })
         setToken('');
     }
+
     return (
         <AntHeader>
             <Menu theme="dark" mode="horizontal">
