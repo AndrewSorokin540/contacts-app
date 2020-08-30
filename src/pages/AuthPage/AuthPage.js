@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { Form, Input, Button } from 'antd';
 import { useFetch, useLocalStorage } from 'hooks';
 import { CurrentUserContext } from 'contexts';
+import { setAuthorized, loadingDone } from 'actions';
 import { getUserFromToken } from 'utils';
 import { FormContainer } from './styled';
 
@@ -27,14 +28,9 @@ const AuthPage = ({ match }) => {
         if (!response) return;
 
         const [id] = getUserFromToken(response.accessToken)
-        console.log(111111, response)
-
         setToken(response.accessToken);
-        dispatch({
-            type: 'SET_AUTHORIZED',
-            payload: { email, id }
-        })
-        dispatch({ type: 'LOADING_DONE' })
+        dispatch(setAuthorized({ email, id }));
+        dispatch(loadingDone());
 
     }, [response, setToken, email, dispatch]);
 

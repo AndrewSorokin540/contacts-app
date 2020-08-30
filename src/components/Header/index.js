@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Layout, Menu } from 'antd';
 import { LogoutOutlined, LoginOutlined, ContactsOutlined } from '@ant-design/icons';
 import { CurrentUserContext } from 'contexts';
+import { setUnauthorized } from 'actions';
 import { useLocalStorage } from 'hooks';
 const { Header: AntHeader } = Layout;
 const { SubMenu } = Menu;
@@ -12,7 +13,7 @@ const Header = () => {
     const [{ isLoggenIn, currentUser }, dispatch] = useContext(CurrentUserContext);
 
     const onExit = () => {
-        dispatch({ type: 'SET_UNAUTHORIZED' })
+        dispatch(setUnauthorized())
         setToken('');
     }
 

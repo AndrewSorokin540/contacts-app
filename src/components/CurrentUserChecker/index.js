@@ -1,6 +1,7 @@
 import { useEffect, useContext } from 'react';
 import { useLocalStorage, useFetch } from 'hooks';
 import { CurrentUserContext } from 'contexts';
+import { loadingStart, setAuthorized, loadingDone } from 'actions';
 import { getUserFromToken } from 'utils';
 
 const CurrentUserChecker = ({ children }) => {
@@ -12,23 +13,19 @@ const CurrentUserChecker = ({ children }) => {
 
     useEffect(() => {
         if (token) {
-            dispatch({ type: 'LOADING_START' })
+            dispatch(loadingStart())
             doFetch();
         }
     }, [token, doFetch, dispatch])
 
     useEffect(() => {
         if (response) {
-            console.log(2222222, response)
-            dispatch({
-                type: 'SET_AUTHORIZED',
-                payload: {
-                    email: response.email,
-                    id: response.id,
-                    contacts: response.contacts ? response.contacts : []
-                }
-            })
-            dispatch({ type: 'LOADING_DONE' })
+            dispatch(setAuthorized({
+                email: response.email,
+                id: response.id,
+                contacts: response.contacts ? response.contacts : []
+            }))
+            dispatch(loadingDone())
         }
     }, [response, doFetch, dispatch])
 

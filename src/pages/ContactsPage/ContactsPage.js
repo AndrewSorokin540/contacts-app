@@ -57,7 +57,7 @@ const ContactsPage = () => {
         if (!currentUser.contacts) {
             doFetch()
         }
-    }, [currentUser.contacts])
+    }, [currentUser.contacts, doFetch])
 
     if (!isLoggenIn) {
         return <Redirect to='/login' />
