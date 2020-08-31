@@ -47,6 +47,7 @@ const Contact = ({ name, accounts, onDelete, onEdit, ...other }) => {
                 }
             </List>
             <Button danger icon={<DeleteOutlined />} onClick={onDelete}>Удалить</Button>
+            &nbsp;
             <ContactForm
                 title='Редактировать'
                 icon={<EditOutlined />}

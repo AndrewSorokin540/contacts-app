@@ -1,11 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Redirect } from 'react-router-dom';
-import { Form, Input, Button } from 'antd';
+import { Redirect, Link } from 'react-router-dom';
+import { Form, Input, Button, Typography } from 'antd';
 import { useFetch, useLocalStorage } from 'hooks';
 import { CurrentUserContext } from 'contexts';
 import { setAuthorized, loadingDone } from 'actions';
 import { getUserFromToken } from 'utils';
+import { TextCenter } from 'styled';
 import { FormContainer } from './styled';
+
+const { Title } = Typography;
 
 const AuthPage = ({ match }) => {
     const [email, setEmail] = useState('');
@@ -38,6 +41,16 @@ const AuthPage = ({ match }) => {
 
     return (
         <FormContainer>
+            <Title level={2}>
+                <TextCenter>
+                    {onRegisterPage ? 'Зарегистрироваться' : 'Войти'}
+                </TextCenter>
+            </Title>
+            <Link to={onRegisterPage ? '/login' : '/register'}>
+                <TextCenter>
+                    {onRegisterPage ? 'Уже есть аккаунт?' : 'Нет аккаунта?'}
+                </TextCenter>
+            </Link>
             <Form
                 layout='vertical'
                 name="basic"

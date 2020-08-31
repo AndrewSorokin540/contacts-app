@@ -169,12 +169,22 @@
       "id": 9,
       "contacts": [
         {
-          "contactName": "vasya",
+          "contactName": "",
           "accounts": {
-            "phone": "555",
-            "whatsApp": "666",
+            "phone": "asdasd",
+            "whatsApp": "",
             "email": "",
-            "skype": "fasg asd ",
+            "skype": "",
+            "github": ""
+          }
+        },
+        {
+          "contactName": "",
+          "accounts": {
+            "phone": "",
+            "whatsApp": "asd",
+            "email": "asd",
+            "skype": "",
             "github": ""
           }
         }

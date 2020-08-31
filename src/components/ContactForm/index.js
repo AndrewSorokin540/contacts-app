@@ -50,13 +50,13 @@ const ContactForm = ({ title, icon, buttonType, onSubmit, index, contactName: na
                         <Input value={contactName} onChange={e => setContactName(e.target.value)} placeholder='Имя контакта' />
                     </Form.Item>
                     <Form.Item label={<PhoneOutlined />}>
-                        <Input value={phone} onChange={e => setPhone(e.target.value)} placeholder='Телефон' />
+                        <Input type='number' required value={phone} onChange={e => setPhone(e.target.value)} placeholder='Телефон' />
                     </Form.Item>
                     <Form.Item label={<WhatsAppOutlined />}>
                         <Input value={whatsApp} onChange={e => setWhatsApp(e.target.value)} placeholder='WhatsApp' />
                     </Form.Item>
                     <Form.Item label={<MailOutlined />}>
-                        <Input value={email} onChange={e => setEmail(e.target.value)} placeholder='Email' />
+                        <Input type='email' value={email} onChange={e => setEmail(e.target.value)} placeholder='Email' />
                     </Form.Item>
                     <Form.Item label={<SkypeOutlined />}>
                         <Input value={skype} onChange={e => setSkype(e.target.value)} placeholder='Skype' />
