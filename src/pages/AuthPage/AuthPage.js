@@ -8,14 +8,14 @@ import { getUserFromToken } from 'utils';
 import { TextCenter } from 'styled';
 import { FormContainer } from './styled';
 
-const { Title } = Typography;
+const { Title, Paragraph } = Typography;
 
 const AuthPage = ({ match }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const onRegisterPage = match.path === '/register';
     const fetchUrl = onRegisterPage ? '/register' : '/login'
-    const [{ response }, doFetch] = useFetch(fetchUrl);
+    const [{ response, error }, doFetch] = useFetch(fetchUrl);
     const [, setToken] = useLocalStorage('token');
     const [{ isLoggenIn }, dispatch] = useContext(CurrentUserContext);
 
@@ -28,14 +28,14 @@ const AuthPage = ({ match }) => {
     };
 
     useEffect(() => {
-        if (!response) return;
+        if (!response || error) return;
 
         const [id] = getUserFromToken(response.accessToken)
         setToken(response.accessToken);
         dispatch(setAuthorized({ email, id }));
         dispatch(loadingDone());
 
-    }, [response, setToken, email, dispatch]);
+    }, [response, error, setToken, email, dispatch]);
 
     if (isLoggenIn) return <Redirect to='/' />
 
@@ -69,6 +69,13 @@ const AuthPage = ({ match }) => {
                     rules={[{ required: true, message: 'Please input your password!' }]}>
                     <Input.Password size="large" value={password} onChange={e => setPassword(e.target.value)} />
                 </Form.Item>
+
+                <TextCenter>
+                    <Paragraph type="danger">
+                        {error && error}
+                    </Paragraph>
+                </TextCenter>
+
 
                 <Form.Item>
                     <Button size="large" block type="primary" htmlType="submit">

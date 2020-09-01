@@ -15,22 +15,31 @@ const useFetch = endpoint => {
         setIsLoading(true);
     }, [])
 
+    const reqOptions = {
+        ...options,
+        headers: {
+            authorization: token ? `Bearer ${token}` : '',
+            'Content-Type': 'application/json;charset=utf-8',
+            ...options.headers
+        }
+    }
+
     useEffect(() => {
         if (!isLoading) return;
 
-        const reqOptions = {
-            ...options,
-            headers: {
-                authorization: token ? `Bearer ${token}` : '',
-                'Content-Type': 'application/json;charset=utf-8',
-                ...options.headers
-            }
-        }
-
         fetch(baseUrl + endpoint, reqOptions)
-            .then(res => res.json())
-            .then(data => setResponse(data))
-            .catch(err => setError(err))
+            .then(res => {
+                if (res.ok) {
+                    return res.json().then(data => {
+                        setError(null)
+                        setResponse(data)
+                    })
+                }
+                return res.json().then(error => {
+                    setError(error)
+                })
+
+            })
             .finally(() => setIsLoading(false))
 
     }, [endpoint, options, token, isLoading]);

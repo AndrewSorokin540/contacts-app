@@ -3,62 +3,17 @@
     {
       "email": "xxxx@gmail.com",
       "password": "$2a$10$T2xbw32msMv4zuQ5EUS4Ee1tkj4leboOesv2lfjR3cG2hE/vvbaBu",
-      "id": 1,
-      "contacts": [
-        {
-          "contactName": "Ivan",
-          "accounts": [
-            {
-              "type": "phone",
-              "value": "8888"
-            }
-          ]
-        },
-        {
-          "contactName": "Pyotor",
-          "accounts": [
-            {
-              "type": "phone",
-              "value": "777"
-            }
-          ]
-        }
-      ]
+      "id": 1
     },
     {
       "email": "qqqq@gmail.com",
       "password": "$2a$10$W62gGGPgsasTgNW79uH.1uscKL6Dc3foqpwYHyc5YpGuBD72hvQTm",
-      "id": 2,
-      "contacts": [
-        {
-          "contactName": "yyyyy",
-          "accounts": [
-            {
-              "type": "whatsApp",
-              "value": "55555"
-            }
-          ]
-        }
-      ]
+      "id": 2
     },
     {
       "email": "yyyy@gmail.com",
       "password": "$2a$10$iRu7JejbfOkZuHHIZ3qzjuFbr5Jxaj2Wz3B5x8VpT8hdvRTHJp9VS",
-      "id": 3,
-      "contacts": [
-        {
-          "contactName": "ггг"
-        },
-        {
-          "contactName": "ооо"
-        },
-        {
-          "contactName": "ввв"
-        },
-        {
-          "contactName": "вввффф"
-        }
-      ]
+      "id": 3
     },
     {
       "email": "xxxxxx@gmail.com",
@@ -76,16 +31,17 @@
       "id": 6,
       "contacts": [
         {
-          "contactName": "yyyy"
-        },
-        {
-          "contactName": "xxxx"
+          "contactName": "yyyy",
+          "accounts": {
+            "phone": "",
+            "whatsApp": "",
+            "email": "dfjg",
+            "skype": "",
+            "github": "dfnjg"
+          }
         },
         {
           "contactName": "rrr"
-        },
-        {
-          "contactName": "oooo"
         }
       ]
     },
