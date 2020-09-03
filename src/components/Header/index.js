@@ -4,18 +4,18 @@ import { Layout, Menu } from 'antd';
 import { LogoutOutlined, LoginOutlined, ContactsOutlined } from '@ant-design/icons';
 import { CurrentUserContext } from 'contexts';
 import { setUnauthorized } from 'actions';
-// import { useLocalStorage } from 'hooks';
+import { useLocalStorage } from 'hooks';
 const { Header: AntHeader } = Layout;
 const { SubMenu } = Menu;
 
 const Header = () => {
-    // const [, setToken] = useLocalStorage('token');
+    const [, setToken] = useLocalStorage('token');
     const [{ isLoggenIn, currentUser }, dispatch] = useContext(CurrentUserContext);
 
-    const onExit = () => {
+    const onLogout = () => {
         dispatch(setUnauthorized())
-        // setToken('');
-        localStorage.removeItem('token') // ToDo: костыль
+        setToken('');
+        // localStorage.removeItem('token') // ToDo: костыль
     }
 
     return (
@@ -23,7 +23,7 @@ const Header = () => {
             <Menu theme="dark" mode="horizontal">
                 {isLoggenIn && (
                     <SubMenu icon={<ContactsOutlined />} title={currentUser.email}>
-                        <Menu.Item icon={<LogoutOutlined />} key="1" onClick={() => onExit()}>Выйти</Menu.Item>
+                        <Menu.Item icon={<LogoutOutlined />} key="1" onClick={onLogout}>Выйти</Menu.Item>
                     </SubMenu>
                 )}
                 {!isLoggenIn && <Menu.Item icon={<LoginOutlined />} key="2"><Link to='/login'>Вход</Link></Menu.Item>}

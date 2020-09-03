@@ -3,7 +3,18 @@
     {
       "email": "xxxx@gmail.com",
       "password": "$2a$10$5pSgH71221ifuxzwaaYCb.8wWDnA3M4MKs7uuGcGVxRPSKb/hL4Ae",
-      "contacts": [],
+      "contacts": [
+        {
+          "contactName": "asd",
+          "accounts": {
+            "phone": "96498968",
+            "whatsApp": "asdsfasf",
+            "email": "andrewsorokin540@gmail.com",
+            "skype": "",
+            "github": ""
+          }
+        }
+      ],
       "id": 1
     }
   ]

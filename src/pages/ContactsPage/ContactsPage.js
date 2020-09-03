@@ -13,8 +13,6 @@ const ContactsPage = () => {
 
     const currentUserContacts = response ? response.contacts : currentUser.contacts;
 
-    console.log('currentUserContacts', currentUserContacts)
-
     const onContactAdd = (contactName, accounts) => {
         doFetch({
             method: 'PATCH',
