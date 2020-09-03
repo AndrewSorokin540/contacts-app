@@ -5,7 +5,10 @@ const useLocalStorage = (key) => {
     const [value, setValue] = useState(() => localStorage.getItem(key) || '');
 
     useEffect(() => {
-        if (value) {
+        if (!value) {
+            localStorage.removeItem(key)
+        }
+        else {
             localStorage.setItem(key, value)
         }
     }, [key, value])

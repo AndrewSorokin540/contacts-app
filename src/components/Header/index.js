@@ -4,17 +4,18 @@ import { Layout, Menu } from 'antd';
 import { LogoutOutlined, LoginOutlined, ContactsOutlined } from '@ant-design/icons';
 import { CurrentUserContext } from 'contexts';
 import { setUnauthorized } from 'actions';
-import { useLocalStorage } from 'hooks';
+// import { useLocalStorage } from 'hooks';
 const { Header: AntHeader } = Layout;
 const { SubMenu } = Menu;
 
 const Header = () => {
-    const [, setToken] = useLocalStorage('token');
+    // const [, setToken] = useLocalStorage('token');
     const [{ isLoggenIn, currentUser }, dispatch] = useContext(CurrentUserContext);
 
     const onExit = () => {
         dispatch(setUnauthorized())
-        setToken('');
+        // setToken('');
+        localStorage.removeItem('token') // ToDo: костыль
     }
 
     return (

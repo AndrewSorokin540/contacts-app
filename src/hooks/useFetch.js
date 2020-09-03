@@ -42,7 +42,7 @@ const useFetch = endpoint => {
             })
             .finally(() => setIsLoading(false))
 
-    }, [endpoint, options, token, isLoading]);
+    }, [endpoint, reqOptions, token, isLoading]);
 
     return [{ response, error, isLoading }, doFetch]
 }

@@ -9,6 +9,8 @@ import {
     SmileOutlined
 } from '@ant-design/icons';
 
+import { ErrorMessage } from 'components';
+
 const ContactForm = ({ title, icon, buttonType, onSubmit, index, contactName: name = '', accounts }) => {
 
     const [modalOpen, setModalOpen] = useState(false);
@@ -18,16 +20,34 @@ const ContactForm = ({ title, icon, buttonType, onSubmit, index, contactName: na
     const [email, setEmail] = useState(accounts.email || '');
     const [skype, setSkype] = useState(accounts.skype || '');
     const [github, setGithub] = useState(accounts.github || '');
+    const [showNoNameMessage, setShowNoNameMessage] = useState(false);
+    const [showNoAccountsMessage, setShowNoAccountsMessage] = useState(false);
+
+    const noName = !contactName
+    const noAccounts = !phone && !whatsApp && !email && !skype && !github
 
     const onOk = () => {
-        onSubmit(contactName, { phone, whatsApp, email, skype, github }, index);
-        setModalOpen(false);
-        setContactName('');
-        setPhone('');
-        setWhatsApp('');
-        setEmail('');
-        setSkype('');
-        setGithub('');
+        if (!noName && !noAccounts) {
+            onSubmit(contactName, { phone, whatsApp, email, skype, github }, index);
+            setModalOpen(false);
+            setContactName('');
+            setPhone('');
+            setWhatsApp('');
+            setEmail('');
+            setSkype('');
+            setGithub('');
+            setShowNoNameMessage(false)
+            setShowNoAccountsMessage(false)
+        } else if (noName && noAccounts) {
+            setShowNoNameMessage(true)
+            setShowNoAccountsMessage(true)
+        } else if (noName && !noAccounts) {
+            setShowNoAccountsMessage(false)
+            setShowNoNameMessage(true)
+        } else if (!noName && noAccounts) {
+            setShowNoNameMessage(false)
+            setShowNoAccountsMessage(true)
+        }
     }
 
     return (
@@ -65,6 +85,8 @@ const ContactForm = ({ title, icon, buttonType, onSubmit, index, contactName: na
                         <Input value={github} onChange={e => setGithub(e.target.value)} placeholder='Github' />
                     </Form.Item>
                 </Form>
+                {showNoNameMessage && <ErrorMessage text='Пожалуйста, введите имя контакта' />}
+                {showNoAccountsMessage && <ErrorMessage text='Заполните хотя-бы одно поле контактов' />}
             </Modal>
         </>
     )

@@ -13,7 +13,9 @@ const ContactsPage = () => {
 
     const currentUserContacts = response ? response.contacts : currentUser.contacts;
 
-    const onContactAdd = (contactName, accounts, index) => {
+    console.log('currentUserContacts', currentUserContacts)
+
+    const onContactAdd = (contactName, accounts) => {
         doFetch({
             method: 'PATCH',
             body: JSON.stringify({

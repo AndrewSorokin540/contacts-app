@@ -5,10 +5,11 @@ import { useFetch, useLocalStorage } from 'hooks';
 import { CurrentUserContext } from 'contexts';
 import { setAuthorized, loadingDone } from 'actions';
 import { getUserFromToken } from 'utils';
+import { ErrorMessage } from 'components';
 import { TextCenter } from 'styled';
 import { FormContainer } from './styled';
 
-const { Title, Paragraph } = Typography;
+const { Title } = Typography;
 
 const AuthPage = ({ match }) => {
     const [email, setEmail] = useState('');
@@ -21,19 +22,24 @@ const AuthPage = ({ match }) => {
 
     const onFinish = () => {
 
+        const body = onRegisterPage ? { email, password, contacts: [] } : { email, password }
+
         doFetch({
             method: 'POST',
-            body: JSON.stringify({ email, password })
+            body: JSON.stringify(body)
         })
     };
 
     useEffect(() => {
-        if (!response || error) return;
 
-        const [id] = getUserFromToken(response.accessToken)
-        setToken(response.accessToken);
-        dispatch(setAuthorized({ email, id }));
-        dispatch(loadingDone());
+        if (response && !error) {
+            const [id] = getUserFromToken(response.accessToken)
+            setToken(response.accessToken);
+            dispatch(setAuthorized({ email, id }));
+            dispatch(loadingDone());
+        }
+
+        // TODO: коллбэк
 
     }, [response, error, setToken, email, dispatch]);
 
@@ -70,12 +76,7 @@ const AuthPage = ({ match }) => {
                     <Input.Password size="large" value={password} onChange={e => setPassword(e.target.value)} />
                 </Form.Item>
 
-                <TextCenter>
-                    <Paragraph type="danger">
-                        {error && error}
-                    </Paragraph>
-                </TextCenter>
-
+                {error && <ErrorMessage text={error} />}
 
                 <Form.Item>
                     <Button size="large" block type="primary" htmlType="submit">
